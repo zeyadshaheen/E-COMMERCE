@@ -3,6 +3,7 @@ import Header from './component/Home/Header';
 import Home from './component/Home/Home.jsx';
 import WebFont from "webfontloader";
 import { useEffect } from 'react';
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 
 function App() {
@@ -15,10 +16,11 @@ function App() {
 },[]);
 
   return (
-    <div className="App">
-    <Header/>
-    <Home/>
-    </div>
+    <Router>
+      <Switch>
+      <Route exact path="/" component={Home} />
+      </Switch>
+    </Router>
   );
 }
 
