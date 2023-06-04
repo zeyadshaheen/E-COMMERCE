@@ -4,6 +4,9 @@ import Home from './component/Home/Home.jsx';
 import WebFont from "webfontloader";
 import { useEffect } from 'react';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import ProductDetails from './component/Products/ProductDetails';
+
+
 
 
 function App() {
@@ -19,6 +22,7 @@ function App() {
     <Router>
       <Switch>
       <Route exact path="/" component={Home} />
+      <Route exact path="/product/:id" component={ProductDetails} />
       </Switch>
     </Router>
   );

@@ -1,7 +1,7 @@
 // eslint-disable-next-line
 import React, { useRef } from "react";
 import "./Header.css";
-
+import Logo from "../../Assets/Deza Logo.jpg";
 
 const Header = () => {
 
@@ -14,8 +14,9 @@ const Header = () => {
       <div className="logo pxy__10">
         <a href="/">
           <img
-           //src="https://scontent.fcai2-1.fna.fbcdn.net/v/t39.30808-6/290373808_138260602203610_7573458981662651109_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=kuq2j5-HcigAX-f3emS&_nc_ht=scontent.fcai2-1.fna&oh=00_AfABfXEgzKJKA7Rxvvj4Ds35ASwBD4mVuWe0FjUGau_qLA&oe=647E4C43"
-            src="http://wp.alithemes.com/html/nest/demo/assets/imgs/theme/logo.svg"
+          
+           src={Logo}
+            //src="http://wp.alithemes.com/html/nest/demo/assets/imgs/theme/logo.svg"
             alt=""
             className="logo"
             style={{

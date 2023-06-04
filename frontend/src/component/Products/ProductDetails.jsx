@@ -1,12 +1,11 @@
-import React from 'react'
+  import React from 'react'
 
-const ProductDetails = () => {
-  return (
-    <div>
-      
-    </div>
+  function ProductDetails() {
+    return (
+      <div>
+        gggg
+      </div>
+    )
+  }
 
-  )
-}
-
-export default ProductDetails
+  export default ProductDetails

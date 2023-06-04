@@ -3,6 +3,8 @@ import "./Home.css";
 import Carousel from "react-material-ui-carousel";
 import bg from "../../Assets/background.jpg";
 import bg2 from "../../Assets/background2.jpg";
+import bg3 from "../../Assets/IMG_8915.jpeg";
+import bg5 from "../../Assets/IMG_9045.jpeg";
 import ProductCard from "../Products/ProductCard";
 import 'react-toastify/dist/ReactToastify.css';
 import { useDispatch, useSelector } from "react-redux";
@@ -39,8 +41,8 @@ const Home = () => {
           {/* Carousel */}
           <div className="banner">
             <Carousel>
-              <img src={bg} className="bgImg" alt="z1" />
-              <img src={bg2} className="bgImg" alt="z2" />
+              <img src={bg5} className="bgImg" alt="z1" />
+              <img src={bg3} className="bgImg" alt="z2" />
             </Carousel>
             <div className="home__content">
               <div style={{ display: "flex", alignItems: "center" }}>
