@@ -14,6 +14,7 @@ import Loading from "../../more/Loader";
 import MetaData from "../../more/Metadata";
 import Header from "./Header";
 
+
 const Home = () => { 
   const dispatch = useDispatch();
   const { products, error, loading } = useSelector((state) => state.products);

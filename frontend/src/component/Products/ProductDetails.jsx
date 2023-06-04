@@ -1,9 +1,9 @@
   import React from 'react'
-
+  import {Link} from "react-router-dom";
   function ProductDetails() {
     return (
       <div>
-        gggg
+        hhhhh
       </div>
     )
   }
