@@ -9,6 +9,8 @@ const ProductCard = ({ product }) => {
     precision: 0.5,
   };
 
+  
+
   return (
     <Link className="ProductCard" to={`/product/${product._id}`}>
       <img

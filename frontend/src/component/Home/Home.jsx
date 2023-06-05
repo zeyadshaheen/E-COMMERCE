@@ -37,6 +37,7 @@ const Home = () => {
         <Loading />
       ) : (
         <>
+        
         <Header />
           <MetaData title="Home" />
           {/* Carousel */}

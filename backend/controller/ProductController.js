@@ -61,6 +61,7 @@ exports.deleteProduct = catchAsyncErrors(async (req, res, next) => {
 /////////////////////////////////////////////Single Product Details//////////////////////////////////////////////
 exports.getSingleProduct = catchAsyncErrors(async (req, res, next) => {
   const product = await Product.findById(req.params.id);
+  const productCount = await Product.countDocuments();
   if (!product) {
     return next(new ErrorHandler("Product is not found with this id", 404));
   }
