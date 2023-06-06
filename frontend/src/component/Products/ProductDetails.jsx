@@ -6,6 +6,9 @@ import { useSelector } from 'react-redux';
 import { clearErrors, getProductDetails } from '../../actions/ProductActions';
 import { useDispatch } from 'react-redux';
 import Carousel from 'react-material-ui-carousel';
+import "./Productdetails.css";
+import Footer from '../../Footer';
+
 
 
   function ProductDetails({match}) {
@@ -69,7 +72,7 @@ import Carousel from 'react-material-ui-carousel';
                   <span className="quantity">Quantity</span>
                   <div className="detailsBlock-3-1-1">
                     <button>-</button>
-                    <input type="number" readOnly />
+                    <input type="number" readOnly  placeholder='1'/>
                     <button>+</button>
                   </div>{" "}
                 </div>
@@ -284,6 +287,7 @@ import Carousel from 'react-material-ui-carousel';
               </div>
             </div>
           </div>
+          <Footer />
 
    </>
     )

@@ -13,6 +13,7 @@ import { clearErrors, getProduct } from "../../actions/ProductActions";
 import Loading from "../../more/Loader";
 import MetaData from "../../more/Metadata";
 import Header from "./Header";
+import Footer from "../../Footer";
 
 
 const Home = () => { 
@@ -144,6 +145,7 @@ const Home = () => {
                 <ProductCard key={product._id} product={product} />
               ))}
           </div>
+          <Footer />
         </>
       )}
     </>
