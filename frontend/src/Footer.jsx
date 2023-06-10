@@ -8,8 +8,10 @@ const Footer = () => {
       {/* Footer 1st part */}
       <div className="footer1st">
         <img
-          src="http://wp.alithemes.com/html/nest/demo/assets/imgs/theme/logo.svg"
-          style={{ cursor: "pointer" }}
+          src={Logo}
+          style={{ cursor: "pointer" , width: "150px",
+          height: "100px",
+          "object-fit": "contain"}}
         />
         <div className="location flex py__10">
           <svg

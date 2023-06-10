@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 // import {Link} from "react-router-dom";
 import Header from "../Home/Header";
 import MetaData from '../../more/Metadata';
@@ -8,6 +8,7 @@ import { useDispatch } from 'react-redux';
 import Carousel from 'react-material-ui-carousel';
 import "./Productdetails.css";
 import Footer from '../../Footer';
+import { toast } from 'react-toastify';
 
 
 
@@ -26,20 +27,35 @@ import Footer from '../../Footer';
       }
       dispatch(getProductDetails(match.params.id));
     }, [ error]);
+
+      // Increase quantity
+  const [quantity, setQuantity] = useState(1);
+
+  const increaseQuantity = () => {
+    if (product.Stock <= quantity) return alert("Product stock limited");
+    const qty = quantity + 1;
+    setQuantity(qty);
+  };
+
+  const decreaseQuantity = () => {
+    if (1 >= quantity) return;
+    const qty = quantity - 1;
+    setQuantity(qty);
+  };
+
+
   
 
     return (
-    
-    
         <>
   <MetaData title={`${product.name}`} />
    <Header/>
 
    <div className="ProductDetails">
             <div className="first__varse">
-              <Carousel>
-                {product.images &&
-                  product.images.map((item, i) => (
+              
+                <Carousel>
+                {product.images && product.images.map((item, i) => (
                     <img
                       className="CarouselImage"
                       key={i}
@@ -48,6 +64,7 @@ import Footer from '../../Footer';
                     />
                   ))}
               </Carousel>
+            
             </div>
             <div className="varse__2">
               <div className="detailsBlock-1">
@@ -71,9 +88,9 @@ import Footer from '../../Footer';
                 <div className="detailsBlock-3-1">
                   <span className="quantity">Quantity</span>
                   <div className="detailsBlock-3-1-1">
-                    <button>-</button>
-                    <input type="number" readOnly  placeholder='1'/>
-                    <button>+</button>
+                    <button onClick={decreaseQuantity}>-</button>
+                    <input type="number" readOnly  value={quantity}/>
+                    <button onClick={increaseQuantity}>+</button>
                   </div>{" "}
                 </div>
                 <p className="stock__meta" style={{ paddingBottom: ".5vmax" }}>

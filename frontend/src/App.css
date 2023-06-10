@@ -274,3 +274,11 @@ label.MuiRating-label {
     display: flex;
   }
 }
+
+.ProductDetails{
+  .css-1l7c0cy{
+    display: flex; 
+    justify-content: center;
+  }
+}
+

@@ -14,7 +14,11 @@
     height: 350px;
     object-fit: contain;
   }
-  .first__varse {margin: auto;}
+  .first__varse {
+    /* display: flex;
+    justify-content: center; */
+    margin: auto;
+    width: 50%;}
   .varse__2{
     width: 50%;
     overflow: hidden;
@@ -24,6 +28,7 @@
     align-items: center!important;
     display: flex!important;
   }
+
   .detailsBlock-1 > h2 {
     padding: 5px 0px;
   }
