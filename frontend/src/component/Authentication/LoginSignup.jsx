@@ -80,8 +80,8 @@ function LoginSignup({ history, location }) {
     
       useEffect(() => {
         if (error) {
-          toast.error(error);
-          dispatch(CLEAR_ERRORS());
+          alert(error);
+          dispatch(clearErrors());
         }
     
         if (isAuthenticated) {
