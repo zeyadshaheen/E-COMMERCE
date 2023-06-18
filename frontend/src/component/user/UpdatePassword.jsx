@@ -7,8 +7,8 @@ import MetaData from "../../more/Metadata";
 import LockOpenIcon from "@material-ui/icons/LockOpen";
 import LockIcon from "@material-ui/icons/Lock";
 import VpnKeyIcon from "@material-ui/icons/VpnKey";
-import { clearErrors, updatePassword } from "../../actions/userAction";
-import { UPDATE_PASSWORD_RESET } from "../../constans/userContans";
+import { clearErrors, updatePassword } from "../../actions/userActions";
+import { UPDATE_PASSWORD_RESET } from "../../constans/userConstans";
 
 const UpdatePassword = ({ history }) => {
 

@@ -7,10 +7,13 @@ import ProductDetails from './component/Products/ProductDetails';
 import LoginSignup from "./component/Authentication/LoginSignup";
 import UserData from './more/UserData';
 import { useSelector } from 'react-redux';
-import { loadUser } from './actions/userActions';
+import { loadUser, updatePassword } from './actions/userActions';
 import store from './store';
 import Profile from './component/user/Profile';
 import ProtectedRoute from './route/ProtectedRoute';
+import UpdatePassword from './component/user/UpdatePassword';
+import EditProfile from './component/user/EditProfile';
+import About from './component/about/About';
 
 
 
@@ -34,7 +37,11 @@ function App() {
       <Route exact path="/" component={Home} />
       <Route exact path="/product/:id" component={ProductDetails} />
       <Route exact path="/login" component={LoginSignup} />
+      <Route exact path="/about" component={About} />
       <ProtectedRoute exact path="/me" component={Profile}/>
+      <ProtectedRoute exact path="/me/update" component={UpdatePassword}/>
+      <ProtectedRoute exact path="/me/update/info" component={EditProfile}/>
+
       </Switch>
     </Router>
   );

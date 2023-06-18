@@ -6,9 +6,17 @@ const { Console } = require("console");
 const sendToken = require("../utils/jwtToken.js");
 const sendMail = require("../utils/sendMail.js");
 const crypto = require("crypto");
+const cloudinary = require("cloudinary");
 
 //////////////////////////////////////////Register User/////////////////////////////////////////////////
 exports.createUser = catchAsyncErrors(async (req, res, next) => {
+
+  const myCloud = await cloudinary.v2.uploader.upload(avatar, {
+    folder: "avatars",
+    width:150,
+    crop:"scale",
+  });
+
   const { name, email, password } = req.body;
 
   const user = await User.create({
@@ -16,8 +24,8 @@ exports.createUser = catchAsyncErrors(async (req, res, next) => {
     email,
     password,
     avatar: {
-      public_id: "https://test.com",
-      url: "https:test.com",
+      public_id:  myCloud.public_id,
+      url: myCloud.secure_url,
     },
   });
   sendToken(user, 201, res);
@@ -167,12 +175,31 @@ exports.updateProfile = catchAsyncErrors(async (req, res, next) => {
     name: req.body.name,
     email: req.body.email,
   };
-  //we add cloudinary letter then we ar giving condition for the avatar
+
+  if (req.body.avatar !== "") {
+    const user = await User.findById(req.user.id);
+
+    const imageId = user.avatar.public_id;
+
+    await cloudinary.v2.uploader.destroy(imageId);
+
+    const myCloud = await cloudinary.v2.uploader.upload(req.body.avatar, {
+      folder: "avatars",
+      width: 150,
+      crop: "scale",
+    });
+    newUserData.avatar = {
+      public_id: myCloud.public_id,
+      url: myCloud.secure_url,
+    };
+  }
+  
   const user = await User.findByIdAndUpdate(req.user.id, newUserData, {
     new: true,
-    runValidators: true,
+    runValidator: true,
     useFindAndModify: false,
   });
+
   res.status(200).json({
     success: true,
   });
@@ -223,6 +250,12 @@ exports.updateUserRole = catchAsyncErrors(async (req, res, next) => {
 exports.deleteUser = catchAsyncErrors(async (req, res, next) => {
   //we remove cloudinary letter then we ar giving condition for the avatar
   const user = await User.findById(req.params.id);
+
+   const imageId = user.avatar.public_id;
+
+   await cloudinary.v2.uploader.destroy(imageId);
+
+   
   if (!user) {
     return next(new ErrorHandler("User is not found with this id", 400));
   }
