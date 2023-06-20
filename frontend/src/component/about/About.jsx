@@ -180,7 +180,7 @@ const About = () => {
     </div>
     <Footer />
   </div>
-  {/* <BottomTab /> */}
+  <BottomTab />
   </>
     }
     </>

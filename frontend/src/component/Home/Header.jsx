@@ -5,7 +5,16 @@ import Logo from "../../Assets/Deza Logo.jpg";
 import {Link} from "react-router-dom";
 
 const Header = () => {
+  const switcherTab=useRef(null);
 
+  window.addEventListener("scroll", () =>{
+    if(window.pageYOffset > 100){
+        document.querySelector(".navbar").classList.add("active");
+    }
+    else{
+      document.querySelector(".navbar").classList.remove("active");
+    }
+  })
 
   return (
     <div className="Header">

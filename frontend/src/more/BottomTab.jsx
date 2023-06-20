@@ -12,9 +12,6 @@
     
     const BottomTab = () => {
 
-      const { cartItems } = useSelector((state) => state.cart);
-      const { favouriteItems } = useSelector((state) => state.favourite);
-
       return (
         <>
         <div className="bottomOption">
@@ -64,7 +61,7 @@
               borderRadius:"50%",
               color:"#fff",
               fontWeight:"700"
-            }}>{cartItems.length}</span>
+            }}>10</span>
             </div>
           </Link>
           <Link to="/favourites">
@@ -93,7 +90,7 @@
               borderRadius:"50%",
               color:"#fff",
               fontWeight:"400",
-            }}>{favouriteItems.length}</span>
+            }}>6</span>
             </div>
           </Link>
           <Link to="/me">
