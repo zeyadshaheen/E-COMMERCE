@@ -3,8 +3,12 @@ import React, { useRef } from "react";
 import "./Header.css";
 import Logo from "../../Assets/Deza Logo.jpg";
 import {Link} from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const Header = () => {
+  const {cartItems}=useSelector((state)=>state.cart);
+  const { favouriteItems } = useSelector((state) => state.favourite);
+
   const switcherTab=useRef(null);
 
   window.addEventListener("scroll", () =>{
@@ -185,7 +189,7 @@ const Header = () => {
               right: "3.5%",
             }}
           >
-            <span>6</span>
+            <span>{favouriteItems.length}</span>
           </div>
         </div>
         <div className="cart__items flex align__items__center">
@@ -217,7 +221,7 @@ const Header = () => {
                 right: "3.5%",
               }}
             >
-              <span>5</span>
+              <span>{cartItems.length}</span>
             </div>
           </div>
         </div>

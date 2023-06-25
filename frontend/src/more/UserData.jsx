@@ -18,7 +18,8 @@ import { useRef } from "react";
 import { ToastContainer, toast } from 'react-toastify';
 
 const UserData = ({ user }) => {
-
+  const {cartItems}=useSelector((state)=>state.cart);
+  const { favouriteItems } = useSelector((state) => state.favourite);
   const [open, setOpen] = useState(false);
   const history = useHistory();
   
@@ -42,22 +43,22 @@ const UserData = ({ user }) => {
       icon: (
         <ShoppingCartIcon
         style={{
-        color:"tomato",
+        color: cartItems.length===0 ? "": "tomato",
         }}
-        />
+        /> 
       ),
-      name: "Cart",
+      name: `Cart (${cartItems.length})`,
       func: cart,
     },
     {
       icon:
           <HeartIcon 
           style={{
-            color: "tomato",
+            color: favouriteItems.length===0 ? "": "tomato",
            }}
           />,
       name:
-      `Favourit`,
+      `Favourite (${favouriteItems.length})`,
       func: favourite,
     },
     { icon: <PersonIcon />, name: "Profile", func: account },

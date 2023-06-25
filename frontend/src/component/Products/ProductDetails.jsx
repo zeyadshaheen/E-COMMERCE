@@ -8,7 +8,10 @@ import { useDispatch } from 'react-redux';
 import Carousel from 'react-material-ui-carousel';
 import "./Productdetails.css";
 import Footer from '../../Footer';
-import { toast } from 'react-toastify';
+import { ToastContainer,toast } from 'react-toastify';
+import BottomTab from "../../more/BottomTab";
+import { addItemsToCart } from "../../actions/CartAction";
+import { addFavouriteItemsToCart } from "../../actions/FavouriteAction";
 
 
 
@@ -18,7 +21,7 @@ import { toast } from 'react-toastify';
       (state) => state.productDetails
     );
 
-    //console.log(product)
+    
 
     useEffect(() => {
       if (error) {
@@ -32,7 +35,7 @@ import { toast } from 'react-toastify';
   const [quantity, setQuantity] = useState(1);
 
   const increaseQuantity = () => {
-    if (product.Stock <= quantity) return alert("Product stock limited");
+    if (product.Stock <= quantity) return toast.error("Product stock limited");
     const qty = quantity + 1;
     setQuantity(qty);
   };
@@ -43,8 +46,19 @@ import { toast } from 'react-toastify';
     setQuantity(qty);
   };
 
-
+  const addToCartHandler = () => {
+    if (product.Stock > 0) {
+      dispatch(addItemsToCart(match.params.id, quantity));
+      toast.success("Product Added to cart");
+    } else {
+      toast.error("Product stock limited");
+    }
+  };
   
+  const addToFavouriteHandler = () => {
+    dispatch(addFavouriteItemsToCart(match.params.id, quantity));
+    toast.success("Product Added to Favourites");
+  };
 
     return (
         <>
@@ -122,7 +136,7 @@ import { toast } from 'react-toastify';
                       cursor: "pointer",
                       padding: "15px 5px",
                     }}
-                    // onClick={addToFavouriteHandler}
+                    onClick={addToFavouriteHandler}
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -149,7 +163,7 @@ import { toast } from 'react-toastify';
                       alignItems: "center",
                       backgroundColor: "#E4EAEC",
                     }}
-                    // onClick={addToCartHandler}
+                    onClick={addToCartHandler}
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -304,7 +318,19 @@ import { toast } from 'react-toastify';
               </div>
             </div>
           </div>
+          <ToastContainer
+            position="bottom-center"
+            autoClose={5000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+          />
           <Footer />
+          <BottomTab />
 
    </>
     )

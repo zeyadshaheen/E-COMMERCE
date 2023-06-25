@@ -14,7 +14,7 @@ const Support = ({history}) => {
     
     const handleSubmit = (e) =>{
         e.preventDefault()
-        emailjs.sendForm('service_hc4y6hp', 'template_q6oankt', formRef.current, 'user_XiIxNsDzs1ebEgXJcyD1U')
+        emailjs.sendForm('service_4ie274g', 'template_0959qtg', formRef.current, 'XfwHbp0EIY-bH53zv')
       .then((result) => {
           console.log(result.text);
           setDone(true)
@@ -109,8 +109,8 @@ const Support = ({history}) => {
 
                </div>
            </div>
-       </div>
-       <ToastContainer 
+       </div>     
+       <ToastContainer
        position="bottom-center"
        autoClose={5000}
        hideProgressBar={false}
@@ -120,7 +120,7 @@ const Support = ({history}) => {
        pauseOnFocusLoss
        draggable
        pauseOnHover
-       />
+       theme="dark"/>
        <BottomTab />
        </>
     )
