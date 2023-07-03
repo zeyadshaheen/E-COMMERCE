@@ -7,8 +7,10 @@ import ProductDetails from './component/Products/ProductDetails';
 import LoginSignup from "./component/Authentication/LoginSignup";
 import UserData from './more/UserData';
 import { useSelector } from 'react-redux';
+import axios from 'axios';
+import { useState } from 'react';
 import { loadUser, updatePassword } from './actions/userActions';
-import store from './store';
+import Store from './store';
 import Profile from './component/user/Profile';
 import ProtectedRoute from './route/ProtectedRoute';
 import UpdatePassword from './component/user/UpdatePassword';
@@ -21,6 +23,9 @@ import Cart from './component/cart/Cart';
 import Favourite from './component/cart/Favourites';
 import Shipping from './component/cart/Shipping';
 import ConfirmOrder from './component/cart/ConfirmOrder';
+import Payment from './component/cart/Payment';
+import {loadStripe} from '@stripe/stripe-js';
+import {Elements} from '@stripe/react-stripe-js';
 
 
 
@@ -28,18 +33,37 @@ function App() {
 
   const {isAuthenticated,user} = useSelector((state) =>state.user);
 
-  useEffect(() => {
-  WebFont.load({
-    google: {
-      families:["Roboto","Droid Sans","Chilanka"]
-    },
-  });
-  store.dispatch(loadUser())
-},[]);
+  const [stripeApiKey, setStripeApiKey] = useState("");
 
+  async function getStripeApiKey() {
+    const { data } = await axios.get("/api/v2/stripeapikey");
+
+    setStripeApiKey(data.stripeApiKey);
+  }
+
+  useEffect(() => {
+    WebFont.load({
+      google: {
+        families: ["Roboto", "Droid Sans", "Chilanka"],
+      },
+    });
+    
+    Store.dispatch(loadUser());
+    
+    getStripeApiKey();
+
+  }, []);
   return (
-    <Router>
+     
+     <Router>
       {isAuthenticated && <UserData user={user} />}
+
+      {stripeApiKey && (
+        <Elements stripe={loadStripe(stripeApiKey)}>
+          <ProtectedRoute exact path="/process/payment" component={Payment} />
+        </Elements>
+      )}
+
       <Switch>
       <Route exact path="/" component={Home} />
       <Route exact path="/product/:id" component={ProductDetails} />

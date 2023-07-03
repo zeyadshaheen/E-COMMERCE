@@ -4,7 +4,7 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import { productDetailsReducer, productsReducer } from "./reducers/ProductReducer";
 import { profileReducer, userReducer } from './reducers/userReducer';
 import { cartReducer } from './reducers/CartReducer';
-import { favouriteReducer } from './constans/FavouriteReducer';
+import { favouriteReducer } from './reducers/FavouriteReducer';
 
 const reducer = combineReducers({
   products: productsReducer,
