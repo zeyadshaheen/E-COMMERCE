@@ -6,7 +6,7 @@ import Header from "../Home/Header";
 import MetaData from "../../more/Metadata";
 import Loading from "../../more/Loader";
 import "./Profile.css";
-//import BottomTab from "../../more/BottomTab";
+import BottomTab from "../../more/BottomTab";
 
 const Profile = ({history }) => {
 
@@ -69,7 +69,7 @@ useEffect(() => {
         </div>
         </div>
         <Footer />
-        {/* <BottomTab /> */}
+        <BottomTab />
         </>
        )}
        </>

@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import Header from "../Home/Header";
 import MetaData from '../../more/Metadata';
 import { useSelector } from 'react-redux';
-import { clearErrors, getProductDetails } from '../../actions/ProductActions';
+import { clearErrors, getProductDetails, newReview } from '../../actions/ProductActions';
 import { useDispatch } from 'react-redux';
 import Carousel from 'react-material-ui-carousel';
 import "./Productdetails.css";
@@ -12,15 +12,43 @@ import { ToastContainer,toast } from 'react-toastify';
 import BottomTab from "../../more/BottomTab";
 import { addItemsToCart } from "../../actions/CartAction";
 import { addFavouriteItemsToCart } from "../../actions/FavouriteAction";
+import ReviewCard from "./ReviewCard.jsx"
+import { Rating } from "@material-ui/lab";
+import { NEW_REVIEW_RESET } from '../../constans/ProductConstans';
 
 
 
-  function ProductDetails({match}) {
+  function ProductDetails({match, history}) {
     const dispatch = useDispatch();
     const { product, loading, error } = useSelector(
       (state) => state.productDetails
     );
 
+  const { isAuthenticated } = useSelector((state) => state.user);
+
+  const reviewSubmitHandler = (e) => {
+      e.preventDefault();
+  
+      const myForm = new FormData();
+  
+      myForm.set("rating", rating);
+      myForm.set("comment", comment);
+      myForm.set("productId", match.params.id);
+  
+      {
+        isAuthenticated !== true ? history.push(`/login?redirect=/`) : <></>;
+      }
+  
+      dispatch(newReview(myForm));
+  
+      {
+        comment.length === 0
+          ? toast.error("Please fill the comment box")
+          : toast.success("Review done successfully reload for watch it");
+      }
+      dispatch({ type: NEW_REVIEW_RESET });
+    };
+  
     
 
     useEffect(() => {
@@ -30,6 +58,9 @@ import { addFavouriteItemsToCart } from "../../actions/FavouriteAction";
       }
       dispatch(getProductDetails(match.params.id));
     }, [ error]);
+
+  const [rating, setRating] = useState(0);
+  const [comment, setComment] = useState("");
 
       // Increase quantity
   const [quantity, setQuantity] = useState(1);
@@ -216,8 +247,8 @@ import { addFavouriteItemsToCart } from "../../actions/FavouriteAction";
                 <div className="review__option">
                   {product.reviews &&
                     product.reviews.map((review) => (
-                      // <ReviewCard review={review} />
-                      <></>
+                       <ReviewCard review={review} />
+                      
                     ))}
                 </div>
               ) : (
@@ -266,11 +297,11 @@ import { addFavouriteItemsToCart } from "../../actions/FavouriteAction";
                     >
                       Your Rating*
                     </span>
-                    {/* <Rating
-                      // onChange={(e) => setRating(e.target.value)}
-                      // value={rating}
+                    <Rating
+                       onChange={(e) => setRating(e.target.value)}
+                       value={rating}
                       size="large"
-                    /> */}
+                    />
                     <div
                       style={{
                         display: "flex",
@@ -283,8 +314,8 @@ import { addFavouriteItemsToCart } from "../../actions/FavouriteAction";
                   cols="30"
                   rows="6"
                   placeholder="Comment *"
-                  // value={comment}
-                  // onChange={(e) => setComment(e.target.value)}
+                   value={comment}
+                   onChange={(e) => setComment(e.target.value)}
                   style={{
                     maxWidth: "100%",
                     color: "#111",
@@ -311,7 +342,7 @@ import { addFavouriteItemsToCart } from "../../actions/FavouriteAction";
                     cursor: "pointer",
                     color: "#fff",
                   }}
-                  // onClick={reviewSubmitHandler}
+                   onClick={reviewSubmitHandler}
                 >
                   Submit
                 </button>

@@ -11,7 +11,7 @@ import {
   useElements,
 } from "@stripe/react-stripe-js";
 import axios from "axios";
-import "./payment.css";
+import "./Payment.css";
 import CreditCardIcon from "@material-ui/icons/CreditCard";
 import EventIcon from "@material-ui/icons/Event";
 import VpnKeyIcon from "@material-ui/icons/VpnKey";
@@ -71,6 +71,7 @@ const Payment = ({ history }) => {
           billing_details: {
             name: user.name,
             email: user.email,
+           // phoneNumber:user.phoneNumber,
             address: {
               line1: shippingInfo.address,
               city: shippingInfo.city,

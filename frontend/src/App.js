@@ -26,6 +26,8 @@ import ConfirmOrder from './component/cart/ConfirmOrder';
 import Payment from './component/cart/Payment';
 import {loadStripe} from '@stripe/stripe-js';
 import {Elements} from '@stripe/react-stripe-js';
+import Success from './component/cart/Success';
+import MoreOption from './component/user/MoreOption';
 
 
 
@@ -72,8 +74,10 @@ function App() {
       <Route exact path="/products" component={Products} />
       <Route exact path="/search" component={Search} />
       <Route exact path="/support" component={Support} />
+      <Route exact path="/more" component={MoreOption} />
       <Route exact path="/products/:keyword" component={Products} />
       <Route exact path="/cart" component={Cart} />
+      <ProtectedRoute exact path="/success" component={Success} />
       <Route exact path="/favourites" component={Favourite} />
       <ProtectedRoute exact path="/shipping" component={Shipping}/>
       <ProtectedRoute exact path="/order/confirm" component={ConfirmOrder}/>

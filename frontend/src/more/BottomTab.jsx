@@ -11,6 +11,8 @@
     import DehazeIcon from '@material-ui/icons/Dehaze';
     
     const BottomTab = () => {
+      const {cartItems}=useSelector((state)=>state.cart);
+      const { favouriteItems } = useSelector((state) => state.favourite);
 
       return (
         <>
@@ -61,7 +63,7 @@
               borderRadius:"50%",
               color:"#fff",
               fontWeight:"700"
-            }}>10</span>
+            }}>{cartItems.length}</span>
             </div>
           </Link>
           <Link to="/favourites">
@@ -90,7 +92,7 @@
               borderRadius:"50%",
               color:"#fff",
               fontWeight:"400",
-            }}>6</span>
+            }}>{favouriteItems.length}</span>
             </div>
           </Link>
           <Link to="/me">
